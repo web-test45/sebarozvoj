@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kurzy tvorivého sebarozvoja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --g1:#dce35b;
+      --g2:#45b649;
+      --ink:#333;
+      --muted:#666;
+      --accent:#e710e0;
+      --card-bg:#fff;
+      --bg1:#f8f9fa;
+      --bg2:#e9ecef;
+      --radius-lg:20px;
+      --shadow-lg:0 10px 40px rgba(0,0,0,.1);
+      --shadow-md:0 5px 20px rgba(0,0,0,.1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Baloo 2',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height:1.6;color:var(--ink);
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header (kept identical layout) */
+    header{
+      height:80px;background:#fff;display:flex;justify-content:center;align-items:center;
+      box-shadow:0 2px 5px rgba(0,0,0,.05);position:relative;z-index:10
+    }
+    header img{height:60px}
+
+    /* Hero */
+    .hero{
+      padding:60px 0;text-align:center;position:relative;overflow:hidden;
+      background:linear-gradient(135deg, rgba(69,182,73,.1) 100%, rgba(220,227,91,.1) 0%)
+    }
+    .hero::before{
+      content:"";position:absolute;inset:-50%;background:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="%23dce35b" opacity="0.3"/><circle cx="75" cy="75" r="1.5" fill="%2345b649" opacity="0.2"/><circle cx="50" cy="10" r="1" fill="%23dce35b" opacity="0.4"/></svg>');
+      animation:float 20s linear infinite;pointer-events:none
+    }
+    @keyframes float {0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+    .hero h1{
+      font-size:3rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+    }
+    .hero .subtitle{font-size:1.35rem;color:var(--muted)}
+
+    /* Info band */
+    .course-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .course-info::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 3px;
+            background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+        }
+
+    .course-layout{
+      display:flex;
+      gap:30px;
+      align-items:center;
+      flex-wrap:wrap
+    }
+
+    .course-image{
+      max-width:420px;
+      width:100%;
+      border-radius:15px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      flex-shrink:0
+    }
+
+    .course-details{
+      flex:1;
+      display:grid;
+      gap:14px
+    }
+
+    .detail-item{
+      font-size:1.15rem;
+      font-weight:600;
+      color:var(--ink)
+    }
+
+    .contact-details{margin-top:16px;
+      text-align:center;
+      color:var(--muted);
+      border-top:2px solid #f0f0f0;
+      padding-top:18px
+    }
+
+    /* Generic sections */
+    .section{
+      margin:50px 0;
+      padding:40px;
+      background:var(--card-bg);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-lg);
+      position:relative
+    }
+
+    .section h2{
+      font-size:2.3rem;
+      font-weight:700;
+      margin-bottom:22px;
+      text-align:center;
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent
+    }
+    .lede{font-size:1.18rem;text-align:center;color:var(--muted);max-width:900px;margin:0 auto 10px}
+
+    /* Decorative float images (placeholders to replace later) */
+    .decorative-img{
+      width:160px;height:160px;border-radius:50%;object-fit:cover;border:5px solid #fff;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);margin:18px;float:right
+    }
+    .decorative-img.left{float:left}
+    .img-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+    .img-strip img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;box-shadow:var(--shadow-md)}
+
+    /* Bullet group */
+    .bullet-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:18px 0}
+    .bullet-item{
+      display:flex;gap:10px;align-items:flex-start;padding:14px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(220,227,91,.09), rgba(69,182,73,.09));transition:transform .3s ease
+    }
+    .bullet-item:hover{transform:translateY(-4px)}
+    .bullet-item-bad{
+      display:flex;gap:10px;align-items:flex-start;padding:14px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(227,91,91,.09), rgba(182,69,69,.09))
+    }
+    .bullet-icon{font-size:1.05rem;margin-top:1px}
+
+    /* Course cards */
+    .tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .track{
+      background:#fff;border-radius:16px;padding:20px;border-top:4px solid;box-shadow:var(--shadow-md);
+      border-image:linear-gradient(135deg,var(--g1),var(--g2)) 1
+    }
+    .track h3{font-size:1.35rem;color:var(--accent);margin-bottom:8px}
+    .track p{color:var(--ink)}
+
+    /* Quote bubble */
+    .speech-bubble{
+      background:linear-gradient(135deg,#afd757,#4cc150);color:#fff;padding:20px 26px;border-radius:18px;
+      text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);position:relative;margin:26px 0
+    }
+    .speech-bubble::after{
+      content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);
+      border-left:15px solid transparent;border-right:15px solid transparent;border-top:15px solid #4cc150
+    }
+
+    /* Instructor */
+    .instructor{
+      display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start
+    }
+    .instructor .avatar{
+      width:220px;aspect-ratio:1/1;border-radius:16px;object-fit:cover;box-shadow:var(--shadow-md)
+    }
+    .instructor h3{color:var(--accent);font-size:1.5rem;margin-bottom:8px}
+
+    /* Pricing pills */
+    .pricing{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px}
+    .pill{
+      background:linear-gradient(135deg,rgba(220,227,91,.18),rgba(69,182,73,.18));
+      border:1px solid rgba(69,182,73,.25);padding:10px 16px;border-radius:999px
+    }
+
+    /* Form */
+    .form-section {
+            margin-top: 1000px;
+            background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin: 60px auto; 
+            color: white;
+            max-width: 700px; 
+            border: 1px solid white;
+        }
+        
+
+    
+        .form-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.477);
+            border: 1px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.847);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+
+        .form-group select {
+            appearance: none; /* removes default arrow in most browsers */
+            -webkit-appearance: none; /* for Safari */
+            -moz-appearance: none; /* for Firefox */
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%2345b649' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px 18px;
+            padding-right: 45px; /* space for the arrow */
+            cursor: pointer;
+            color: grey;
+
+        }
+        .form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.847);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .submit-btn {
+            background: rgba(255, 255, 255, 0.477);
+            color: grey;
+            padding: 15px 40px;
+            border: 1px solid white;
+            border-radius: 25px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .instructor{grid-template-columns:1fr}
+      .instructor .avatar{width:100%;max-width:320px}
+      .form-grid{grid-template-columns:1fr}
+      .hero h1{font-size:2.4rem}
+      .hero .subtitle{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header (same as your original) -->
+  <header>
+    <img src="images/logo.png" alt="Logo">
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Kurzy tvorivého sebarozvoja</h1>
+      <p class="subtitle">Keď deti „nemusia“, ale „chcú“, dokážu veľké veci – rozvíjame potenciál, kreativitu a mäkké zručnosti.</p>
+    </div>
+  </section>
+
+  <!-- Course info band -->
+  <div class="container">
+    <div class="course-info">
+      <div class="course-layout">
+        <img class="course-image" src="https://images.unsplash.com/photo-1526328828355-69b01701ca06?q=80&w=1200&auto=format&fit=crop" alt="Tvorivý sebarozvoj – skupinové aktivity detí">
+        <div class="course-details">
+          <div class="detail-item"><strong>TRVANIE:</strong> 6 týždňov · stretnutie 1× týždenne · malé skupiny do 8 detí</div>
+          <div class="detail-item"><strong>VÝBER OKRUHU:</strong> komunikačné / prezentačné / kreatívne myslenie / riešenie problémov</div>
+          <div class="detail-item"><strong>VHODNÉ PRE:</strong> deti 8–12 rokov a mladších tínedžerov</div>
+        </div>
+      </div>
+      <div class="contact-details">📧 info@sebarozvoj.eu │ 📞 0948&nbsp;048&nbsp;641</div>
+    </div>
+  </div>
+
+  <!-- Intro / benefits -->
+  <div class="container">
+    <div class="section">
+      <img class="decorative-img left" src="https://images.unsplash.com/photo-1523246191059-887f74d0c4f0?q=80&w=900&auto=format&fit=crop" alt="Hravé vzdelávanie detí">
+      <p class="lede">
+        Vzdelávanie a sebarozvoj detí hravou a kreatívnou formou – rozvoj potenciálu a mäkkých zručností (soft skills).
+      </p>
+      <div class="bullet-list">
+        <div class="bullet-item"><span class="bullet-icon">🧠</span><span>Rozvoj pamäťových schopností a posilnenie pozornosti</span></div>
+        <div class="bullet-item"><span class="bullet-icon">💬</span><span>Moderné nástroje komunikácie a prezentovania</span></div>
+        <div class="bullet-item"><span class="bullet-icon">🎨</span><span>Rozvoj kreativity, brainstorming, mind mapping, brainwriting</span></div>
+        <div class="bullet-item"><span class="bullet-icon">🤝</span><span>Efektívne riešenie problémov s rešpektom a spoluprácou</span></div>
+      </div>
+
+      <div class="speech-bubble">
+        „Deti sú otvorené hravým formám vzdelávania, rýchlo nasávajú nové zručnosti a vedia ich efektívne aplikovať v praxi.“
+      </div>
+
+      <div class="img-strip" aria-label="Miesta pre vaše fotografie">
+        <!-- Replace these with your own images later -->
+        <img src="https://images.pexels.com/photos/8362852/pexels-photo-8362852.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Tímová aktivita detí">
+        <img src="https://images.pexels.com/photos/4144092/pexels-photo-4144092.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Kreatívne kreslenie">
+        <img src="https://images.unsplash.com/photo-1511634829096-045a111727eb?q=80&w=1200&auto=format&fit=crop" alt="Prezentovanie pred triedou">
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 tracks -->
+  <div class="container">
+    <div class="section">
+      <h2>Tematické okruhy (vyberte si)</h2>
+      <div class="tracks">
+        <div class="track">
+          <h3>Kurz komunikačných zručností</h3>
+          <p>Deti a tínedžeri často potrebujú zlepšiť komunikačné zručnosti – ľahšie nadväzovať vzťahy, obhájiť argumenty, riešiť konflikty, postaviť sa za seba, nastaviť hranice a povedať NIE. V 6-týždňovom kurze si osvoja moderné nástroje rešpektujúcej komunikácie s rodičmi, učiteľmi, rovesníkmi aj cudzími ľuďmi.</p>
+        </div>
+        <div class="track">
+          <h3>Efektívne riešenie problémov</h3>
+          <p>Ukážeme tvorivý brainstorming, mind mapy a brainwriting. Učíme postoj „problém = výzva“, ktorý pripraví na prijímačky, súťaže či pohovory – koučovací princíp hľadania riešení namiesto výhovoriek.</p>
+        </div>
+        <div class="track">
+          <h3>Kurz prezentačných zručností</h3>
+          <p>Prezentovanie projektov v škole patrí medzi silné stresory. Deti získajú princípy pútavého vystupovania – aby to bavilo ich aj publikum. Nácvik hlasu, postoja, štruktúry, práce s trémou a publikom.</p>
+        </div>
+        <div class="track">
+          <h3>Rozvoj kreatívneho myslenia</h3>
+          <p>Hry, úlohy a príbehy rozvíjajú zvedavosť a schopnosť myslieť „inak“. Podporujeme tvorivosť bez hodnotenia, radosť z objavovania a zdravý postoj k chybám – obzvlášť dôležité v dobe, keď sa mnohí spoliehajú na AI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benefits list -->
+  <div class="container">
+    <div class="section">
+      <h2>Benefity tvorivého sebarozvoja</h2>
+      <img class="decorative-img" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=900&auto=format&fit=crop" alt="Radosť z učenia">
+      <div class="bullet-list">
+        <div class="bullet-item"><span class="bullet-icon">✨</span><span>zlepšenie pamäte a koncentrácie</span></div>
+        <div class="bullet-item"><span class="bullet-icon">🧘</span><span>nižší stres pri skúšaní a prezentovaní</span></div>
+        <div class="bullet-item"><span class="bullet-icon">🎯</span><span>vyššia miera tvorivosti</span></div>
+        <div class="bullet-item"><span class="bullet-icon">🪞</span><span>hlbšie porozumenie sebe samému</span></div>
+        <div class="bullet-item"><span class="bullet-icon">💪</span><span>menej pochybností a viac sebaistoty</span></div>
+        <div class="bullet-item"><span class="bullet-icon">😊</span><span>lepšia nálada, viac radosti a vnútornej pohody</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructor -->
+  <div class="container" id="lektor">
+    <div class="section">
+      <h2>Vaša lektorka</h2>
+      <div class="instructor">
+        <img class="avatar" src="https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ing. Miroslava Atanasová">
+        <div>
+          <h3>Ing. Miroslava Atanasová</h3>
+          <p>ICF koučka, certifikovaná lektorka, mentorka a tvorkyňa vzdelávacích programov pre deti i dospelých. V osobnom rozvoji pôsobí vyše 20 rokov. Je mamou, autorkou meditácií aj detských knižiek. <a href="#lektor" style="color:var(--g2);text-decoration:underline">Viac info&nbsp;TU&nbsp;»</a></p>
+          <div class="speech-bubble" style="margin-top:16px">
+            „Najdôležitejšie je, že ich to baví. Rozdiel oproti škole je v tom, že nemusia, ale chcú.“
+          </div>
+          <p>Rozvoj prezentačných a komunikačných zručností, vedenú relaxáciu, rozvoj kreativity a pamäti školila roky pre dospelých. Deti napredujú rýchlo – je radosť sledovať ich výsledky už po krátkom čase.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Practicalities -->
+  <div class="container">
+    <div class="section">
+      <h2>Organizácia a cena</h2>
+      <p class="lede">Každý kurz trvá 6 týždňov, stretávame sa raz týždenne v skupinkách 4–8 detí.</p>
+      <div class="pricing">
+        <span class="pill">Vek: 8–12 rokov</span>
+        <span class="pill">Dĺžka lekcie: 90 min</span>
+        <span class="pill">Cena: 120 € / dieťa / kurz</span>
+        <span class="pill">Skupina: 4–8 detí</span>
+      </div>
+      <div class="contact-details" style="margin-top:16px">Viac info: 📧 info@sebarozvoj.eu · 📞 0948&nbsp;048&nbsp;641</div>
+    </div>
+  </div>
+
+  <!-- Gentle prompt / problem cards -->
+  <div class="container">
+    <div class="section">
+      <div style="text-align:center;font-size:1.25rem;font-weight:600;margin-bottom:16px;color:#b64545">
+        Má vaše dieťa výzvy v komunikácii, trému pri prezentácii alebo ťažšie hľadá riešenia?
+      </div>
+      <div class="bullet-list">
+        <div class="bullet-item-bad"><span class="bullet-icon">❗️</span><span>Nevie sa presadiť, pochybuje o sebe, má nízku sebadôveru.</span></div>
+        <div class="bullet-item-bad"><span class="bullet-icon">❗️</span><span>Stres v škole, porovnávanie sa s ostatnými, nepohoda v kolektíve.</span></div>
+        <div class="bullet-item-bad"><span class="bullet-icon">❗️</span><span>Ťažkosti s udržaním pozornosti alebo s pútavým vystupovaním.</span></div>
+      </div>
+      <div style="text-align:center;font-size:1.2rem;font-weight:600;margin-top:12px;color:var(--g2)">
+        Potom je tento kurz presne preňho/ňu. 
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM (tailored to this page) -->
+  <div class="form-section">
+    <h2>Pre rezerváciu kurzu vyplňte prosím formulár</h2>
+    <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+        My sa vám ozveme telefonicky, preto Vás prosíme aj o uvedenie telefónneho čísla!
+    </p>
+
+    <form class="form-container">
+        <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Meno a priezvisko" required>
+        </div>
+
+        <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" id="phone" name="phone" placeholder="Telefónne číslo" required>
+        </div>
+
+        <div class="form-group">
+            <select id="age" name="age" required>
+                <option value="">Vek dieťaťa</option>
+                <option value="7-10">7-10 rokov</option>
+                <option value="10-14">10-14 rokov</option>
+                <option value="14-16">14-16 rokov</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <textarea id="note" name="note" placeholder="Poznámka"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Odoslať</button>
+    </form>
+</div>
+
+
+</body>
+</html>
