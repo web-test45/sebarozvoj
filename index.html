@@ -2,6 +2,7 @@
 <html lang="sk">
 <head>
 
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Allura" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,111 +29,362 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         z-index: 10;
         position: relative;
-        }
-
+    }
 
     header img {
       height: 60px;
     }
 
+    .intro-text {
+      flex-basis: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .intro-text h1 {
+      color: purple;
+      font-size:2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      margin-top: -10px;
+      font-family: 'Baloo 2', sans-serif;
+    }
+
+    .intro-text p {
+      color: grey;
+      font-size: 1rem;
+    }
+
+
     .container {
       display: flex;
-      height: calc(100vh - 80px);
-      flex-direction: row;
-      position: relative;
-    }
-
-    .half {
-      flex: 1;
+      flex-direction: column; /* stack intro on top */
+      align-items: center;
+      gap: 40px;
+      padding: 60px 20px;
+      min-height: calc(100vh - 80px);
+      background: linear-gradient(135deg, #f5f7fa 0%, #f0f1e9 100%);
       position: relative;
       overflow: hidden;
+    }
+
+    .cards-row {
       display: flex;
-      align-items: center;
       justify-content: center;
-      background-color: black;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
     }
 
-    .bg-image {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.5s ease;
-      z-index: 0;
-    }
 
-    .overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: background-color 0.5s ease;
+    .card {
+      width: 490px;
+      height: 470px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
       z-index: 1;
+      display: block;
     }
 
-    .text {
-        position: relative;
-        font-family: 'Allura';
-        color: #90ee90; /* light green */
-        font-size: 3.6rem;
-        z-index: 2;
-        text-align: center;
-        padding: 1rem 2rem;
-        text-shadow: 1.5px 1.5px 0 #006400; /* subtle dark green outline */
-        user-select: text;
-    }
-
-
-    .link {
+    /* svg overlay that draws the border */
+    .card .svg-border {
       position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
+      pointer-events: none; /* allow clicks through */
       z-index: 3;
-      top: 0;
-      left: 0;
+      display: block;
     }
 
-    .divider {
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #67d02588;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .card-divider {
+      height: 1px;
+      background-color: #e0e0e0;
+      width: 100%;
+    }
+
+    .card-content {
+      padding: 30px 25px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #800080;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      text-align: center;
+      margin-top: -20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .card-list {
+      list-style: none;
+      flex: 1;
+    }
+
+    .card-list li {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .card-list li::before {
+      content: '•';
+      color: #800080;
+      font-weight: bold;
       position: absolute;
-      background-color: rgba(255, 255, 255, 0.2);
-      z-index: 5;
-    }
-
-    /* Divider orientation */
-    @media (min-width: 769px) {
-      .divider {
-        width: 2px;
-        height: 100%;
-        left: 50%;
-        top: 0;
-      }
+      left: 0;
+      top: 0;
     }
 
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
+        gap: 30px;
+        padding: 40px 20px;
       }
-      .divider {
-        height: 2px;
+
+      .card {
         width: 100%;
-        top: 50%;
-        left: 0;
+        max-width: 420px;
       }
     }
 
-    /* Active (hover zone triggers this via JS) */
-    .half.active .bg-image {
-      transform: scale(1.05);
+    /* remaining styles kept intact... */
+    .about_title {
+      font-family: 'Baloo 2', sans-serif;
+      color: #800080;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 40px;
     }
 
-    .half.active .overlay {
-      background-color: rgba(0, 0, 0, 0);
+    .about_wrapper {
+      padding: 60px 0;
+      width: 100%;
+      background: #e7ff9a;
     }
 
-    .half.active .text {
-        /* combine thick black shadow + original dark green outline */
-        text-shadow:
-          1.5px 1.5px 0 #006400, /* dark green outline */
-          4px 4px 6px black;     /* thick black shadow */
+    .about_section {
+      display: flex;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto 60px auto;
+      padding: 0 20px;
+      align-items: flex-start;
+    }
+
+    .about_image {
+      flex: 0 0 350px;
+      text-align: center;
+    }
+
+    .about_image img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .about_caption {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.95rem;
+      color: #666;
+      margin-top: 15px;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .about_text {
+      flex: 1;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .about_text p {
+      margin-bottom: 20px;
+    }
+
+    .about_text strong {
+      color: #800080;
+      font-weight: bold;
+    }
+
+    .about_link {
+      color: #800080;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .about_link:hover {
+      color: #990099;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .about_section {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .about_image {
+        flex: none;
+      }
+
+      .about_image img {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    .blog_section_title {
+      font-family: 'Baloo 2', sans-serif;
+      color: #800080;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+
+    .blog_articles_container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: 'Baloo 2', sans-serif;
+    }
+
+    .article {
+      display: flex;
+      flex-direction: row;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      overflow: hidden;
+      align-items: stretch;
+    }
+
+    .article:hover {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+
+    .article .thumb {
+      flex: 0 0 200px;
+      height: 200px;
+      overflow: hidden;
+      border-top-left-radius: 12px;
+      border-radius: 12px;
+    }
+
+    .article .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .article_body {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .article_body h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #800080;
+    }
+
+    .article_body h2 a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .article_body .excerpt {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .read_more {
+      display: inline-block;
+      background-color: #800080;
+      color: white;
+      padding: 10px 20px;
+      align-self: flex-start;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .read_more:hover {
+      background-color: #990099;
+     
+    }
+
+    .article_meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    .article_meta .icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .article_meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
   </style>
@@ -143,50 +395,260 @@
     <img src="images/logo.png" alt="Logo" />
   </header>
 
-  <div class="container" id="hover-container">
-    <div class="half" id="left">
-      <div class="bg-image" style="background-image: url('images/1.jpg');"></div>
-      <div class="overlay"></div>
-      <div class="text">Pre deti a teenagerov</div>
-      <a href="https://web-test45.github.io/sebarozvoj/deti.html" class="link"></a>
+  <div class="container">
+    <div class="intro-text">
+      <h1>Svet sebarozvoja pre deti a teenagerov</h1>
+      <p>Vyberte si, na čo sa chcete zamerať</p>
     </div>
-    <div class="half" id="right">
-      <div class="bg-image" style="background-image: url('images/2.jpg');"></div>
-      <div class="overlay"></div>
-      <div class="text">Pre dospelých</div>
-      <a href="#dospeli" class="link"></a>
-    </div>
-    <div class="divider"></div>
+    
+   
+    <div class="cards-row">
+    <a href="#deti" class="card">
+      <div class="card-image" style="background-image: url('images/1.jpg');"></div>
+      <div class="card-divider"></div>
+      <div class="card-content">
+        <h2 class="card-title">Kurz mindfulness</h2>
+        <ul class="card-list">
+          <li>Zvládanie stresu pomocou všímavosti</li>
+          <li>Techniky zvládania emócií</li>
+          <li>Budovanie zdravých vzťahov a empatie</li>
+          <li>Zlepšenie komunikácie</li>
+          <li>Rozvoj emočnej inteligencie</li>
+        </ul>
+      </div>
+    </a>
+  
+    <a href="#dospeli" class="card">
+      <div class="card-image" style="background-image: url('images/dva.jpg');"></div>
+      <div class="card-divider"></div>
+      <div class="card-content">
+        <h2 class="card-title">Kurz tvorivého sebarozvoja</h2>
+        <ul class="card-list">
+          <li>Zlepšenie sústredenia a koncentrácie</li>
+          <li>Zvládanie školských povinností s ľahkosťou</li>
+          <li>Rozvoj pamäťových schopností</li>
+          <li>Posilnenie sebavedomia</li>
+          <li>Rozvoj kreativity a posilnenie pozornosti</li>
+        </ul>
+      </div>
+    </a>
+  </div>
   </div>
 
+
+  <div class="about_wrapper">
+    <h1 class="about_title">Akadémia sebarozvoja</h1>
+    
+    <div class="about_section">
+      <div class="about_image">
+        <img src="images/profil.png" alt="Miroslava Atanasová" />
+        <p class="about_caption">Ing. Miroslava Atanasová - zakladateľka OZ Akadémia sebarozvoja</p>
+      </div>
+      <div class="about_text">
+
+        <p><strong>Sprevádzam ľudí na ceste sebarozvoja, objavovania vlastnej hodnoty a vnútornej rovnováhy.</strong></p>
+        <p>V oblasti sebarozvoja sa pohybujem takmer 20 rokov. Som medzinárodne certifikovaná koučka, lektorka a mentorka</p> 
+        <p>Posledné roky sa venujem nástrojom mindfulness (všímavosti), pracujem pomocou afirmácií a učím využívať silu mysle. Som autorkou niekoľkých kníh pre deti a eBookv pre dospelých.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="blog_section_title">Pozývam vás prečítať si články na mojom blogu:</h2>
+  <div class="blog_articles_container">
+    <div class="article">
+      <div class="thumb">
+        <img src="images/clanok1.png" alt="Article image" />
+      </div>
+      <div class="article_body">
+        <h2><a href="#">Prečo dať zelenú sebarozvoju</a></h2>
+        <p class="excerpt">Kvalita nášho života, naše správanie, motívy a túžby vychádzajú z potrieb, ktoré máme, ako aj z našej ochoty či schopnosti tieto potreby naplniť. Niekto má silnú potrebu bezpečia, iný potrebu uznania, prijatia či tvorivosti… U niekoho prevažuje potreba sebarealizácie a rastu. Naplnenie tejto potreby v nás spúšťa množstvo tvorivej energie a udržiava nás motivovaných....</p>
+        <a class="read_more" href="#">Celý článok</a>
+        <div class="article_meta">
+          <span class="author">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+            Miroslava Atanasová
+          </span>
+          <span class="views">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            2091x
+          </span>
+        </div>
+      </div>
+    </div>
+  
+
+    <div class="article">
+      <div class="thumb">
+        <img src="images/clanok2.png" alt="Article image" />
+      </div>
+      <div class="article_body">
+        <h2><a href="#">Ako dobre poznáš svoje vnútorné dieťa?</a></h2>
+        <p class="excerpt">Keď sa v spomienkach vrátime do detstva, určite tam nájdeme veľa lásky, radosti, hravosti či tvorivosti. No nájdeme tu aj “nelásku” v podobe potlačených potrieb, pocitov strachu, hnevu, hanby, straty bezpečia, krivdy či viny… Vnútorné dieťa žije v každom z nás, bez ohľadu na vek, pohlavie či profesiu. Nepredstavuje len príjemné  či nepríjemné spomienky...</p>
+        <a class="read_more" href="#">Celý článok</a>
+        <div class="article_meta">
+          <span class="author">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+            Miroslava Atanasová
+          </span>
+          <span class="views">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            1213x
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="article">
+      <div class="thumb">
+        <img src="images/clanok3.png" alt="Article image" />
+      </div>
+      <div class="article_body">
+        <h2><a href="#">FLOW – stav mysle, kde sa začínajú diať zázraky</a></h2>
+        <p class="excerpt">Stav flow (z angl. prúd) sme už zažili všetci. Je to stav mysle, pri ktorom sme tak ponorení v prítomnom okamihu, že stratíme pojem o čase i okolitom svete. Je jedno, čomu sa v danej chvíli venujeme – či už niečo píšeme, maľujeme, tancujeme, šoférujeme, varíme, tvoríme grafiku alebo práve pracujeme...</p>
+        <a class="read_more" href="#">Celý článok</a>
+        <div class="article_meta">
+          <span class="author">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+            Miroslava Atanasová
+          </span>
+          <span class="views">
+            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
+            1742x
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
   <script>
-    const container = document.getElementById('hover-container');
-    const left = document.getElementById('left');
-    const right = document.getElementById('right');
+    (function () {
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const STROKE_WIDTH = 3; 
 
-    container.addEventListener('mousemove', (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const center = rect.width / 2;
-
-      const threshold = rect.width * 0.03;
-
-      if (x < center - threshold) {
-        left.classList.add('active');
-        right.classList.remove('active');
-      } else if (x > center + threshold) {
-        right.classList.add('active');
-        left.classList.remove('active');
-      } else {
-        left.classList.remove('active');
-        right.classList.remove('active');
+      function parseRadius(style) {
+        // prefer individual top-left radius if provided, else use borderRadius
+        const tl = style.borderTopLeftRadius || style.borderRadius;
+        return Math.max(0, parseFloat(tl) || 0);
       }
-    });
 
-    container.addEventListener('mouseleave', () => {
-      left.classList.remove('active');
-      right.classList.remove('active');
-    });
+      function createSvgOverlay(card) {
+        const svg = document.createElementNS(SVG_NS, 'svg');
+        svg.setAttribute('class', 'svg-border');
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '100%');
+
+        const path = document.createElementNS(SVG_NS, 'path');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', '#91dd58');      // outline
+        path.setAttribute('stroke-width', String(STROKE_WIDTH));
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke-linejoin', 'round');
+        // hidden initially (we'll set dasharray/dashoffset later)
+        svg.appendChild(path);
+        card.appendChild(svg);
+        return { svg, path };
+      }
+
+      function updateBorderPath(card, path) {
+        const rect = card.getBoundingClientRect();
+        const w = Math.max(1, rect.width);
+        const h = Math.max(1, rect.height);
+        const style = getComputedStyle(card);
+        let br = parseRadius(style);
+        // inset for stroke to keep stroke inside the visible rect
+        const inset = STROKE_WIDTH / 2;
+        // clamp radius
+        br = Math.max(0, Math.min(br, w / 2, h / 2) - inset);
+
+        // helper coords
+        const x0 = inset;
+        const x1 = br + inset;
+        const x2 = w - br - inset;
+        const x3 = w - inset;
+        const y0 = inset;
+        const y1 = br + inset;
+        const y2 = h - br - inset;
+        const y3 = h - inset;
+        const startX = w / 2;
+
+        const d = [
+          `M ${startX} ${y0}`,
+          `L ${x2} ${y0}`,
+          `A ${br} ${br} 0 0 1 ${x3} ${y1}`,
+          `L ${x3} ${y2}`,
+          `A ${br} ${br} 0 0 1 ${x2} ${y3}`,
+          `L ${x1} ${y3}`,
+          `A ${br} ${br} 0 0 1 ${x0} ${y2}`,
+          `L ${x0} ${y1}`,
+          `A ${br} ${br} 0 0 1 ${x1} ${y0}`,
+          `L ${startX} ${y0}`,
+          'Z'
+        ].join(' ');
+
+        path.setAttribute('d', d);
+
+        // compute length and set dash styles so we can animate
+        const length = Math.ceil(path.getTotalLength());
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+        path.dataset._length = length;
+        // smooth transition for draw/hide
+        path.style.transition = 'stroke-dashoffset 0.3s linear';
+      }
+
+      function initCard(card) {
+        const { svg, path } = createSvgOverlay(card);
+        // ensure svg viewbox set properly (will be updated by updateBorderPath)
+        svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
+
+        // Initially build path
+        updateBorderPath(card, path);
+        // on hover draw
+        card.addEventListener('mouseenter', () => {
+          // recalc in case size changed just before hover
+          updateBorderPath(card, path);
+          requestAnimationFrame(() => {
+            path.style.strokeDashoffset = 0;
+          });
+        });
+        // on leave hide (reverse animation)
+        card.addEventListener('mouseleave', () => {
+          const len = path.dataset._length || path.getTotalLength();
+          path.style.transition = 'stroke-dashoffset 0.2s linear'; // faster
+          path.style.strokeDashoffset = len;
+        });
+
+        // update on resize using ResizeObserver
+        if ('ResizeObserver' in window) {
+          const ro = new ResizeObserver(() => {
+            // update svg viewBox and path
+            svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
+            updateBorderPath(card, path);
+          });
+          ro.observe(card);
+        } else {
+          // fallback to window resize
+          window.addEventListener('resize', () => {
+            svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
+            updateBorderPath(card, path);
+          });
+        }
+      }
+
+      // init all current cards
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.card').forEach(initCard);
+      });
+    })();
   </script>
 
 </body>
