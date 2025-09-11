@@ -104,6 +104,67 @@
       color:var(--ink)
     }
 
+    .accordion-stack{
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.accordion-item{
+  width:70%;
+  background:#fff;border-radius:16px;box-shadow:var(--shadow-md);
+  overflow:hidden;transition:box-shadow .3s ease, transform .2s ease;
+}
+.accordion-item:focus-within{transform:translateY(-1px);box-shadow:0 12px 32px rgba(0,0,0,.12)}
+
+/* Header + rotating triangle */
+.accordion-header{
+  position:relative;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  color:#fff;border:none;cursor:pointer;width:100%;text-align:left;
+  padding:28px 56px 28px 28px; /* extra right space for triangle */
+  font-size:1.35rem;font-weight:700;line-height:1.4;
+}
+.accordion-header:focus{outline:3px solid rgba(69,182,73,.35);outline-offset:2px}
+
+/* little (white) triangle made with borders */
+.accordion-header::after{
+  content:"";
+  position:absolute;right:22px;top:50%;transform:translateY(-50%) rotate(0deg);
+  width:0;height:0;border-style:solid;
+  border-width:8px 0 8px 12px;               /* ► */
+  border-color:transparent transparent transparent #fff;
+  transition:transform .28s ease;
+  opacity:.95;
+}
+.accordion-item.active .accordion-header::after{
+  transform:translateY(-50%) rotate(90deg);  /* ▼ when open */
+}
+
+/* Smooth open/close with height transition */
+.accordion-content{
+  height:0; overflow:hidden;
+  padding:0 28px;                 /* keep horizontal padding; vertical animates */
+  background:#fafafa;
+  transition:height .36s cubic-bezier(.4,0,.2,1), padding-top .36s ease, padding-bottom .36s ease;
+  font-size:1.1rem;
+  will-change:height;
+}
+/* When active, we reveal vertical padding (height is set in JS) */
+.accordion-item.active .accordion-content{
+  padding-top:24px; padding-bottom:24px;
+}
+
+.accordion-content ul{padding-left:20px;margin:0}
+.accordion-content li{list-style:disc;margin-bottom:12px}
+
+/* Mobile: full width */
+@media (max-width: 768px){
+  .accordion-item{width:100%}
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .accordion-content{transition:none}
+  .accordion-header::after{transition:none}
+}
     .contact-details{margin-top:16px;
       text-align:center;
       color:var(--muted);
@@ -326,7 +387,7 @@
   <div class="container">
     <div class="course-info">
       <div class="course-layout">
-        <img class="course-image" src="https://images.unsplash.com/photo-1526328828355-69b01701ca06?q=80&w=1200&auto=format&fit=crop" alt="Tvorivý sebarozvoj – skupinové aktivity detí">
+        <img class="course-image" src="images/dva.jpg" alt="Tvorivý sebarozvoj – skupinové aktivity detí">
         <div class="course-details">
           <div class="detail-item"><strong>TRVANIE:</strong> 6 týždňov · stretnutie 1× týždenne · malé skupiny do 8 detí</div>
           <div class="detail-item"><strong>VÝBER OKRUHU:</strong> komunikačné / prezentačné / kreatívne myslenie / riešenie problémov</div>
@@ -340,7 +401,7 @@
   <!-- Intro / benefits -->
   <div class="container">
     <div class="section">
-      <img class="decorative-img left" src="https://images.unsplash.com/photo-1523246191059-887f74d0c4f0?q=80&w=900&auto=format&fit=crop" alt="Hravé vzdelávanie detí">
+      <img class="decorative-img left" src="images/deti_3.png" alt="Hravé vzdelávanie detí">
       <p class="lede">
         Vzdelávanie a sebarozvoj detí hravou a kreatívnou formou – rozvoj potenciálu a mäkkých zručností (soft skills).
       </p>
@@ -357,37 +418,82 @@
 
       <div class="img-strip" aria-label="Miesta pre vaše fotografie">
         <!-- Replace these with your own images later -->
-        <img src="https://images.pexels.com/photos/8362852/pexels-photo-8362852.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Tímová aktivita detí">
-        <img src="https://images.pexels.com/photos/4144092/pexels-photo-4144092.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Kreatívne kreslenie">
-        <img src="https://images.unsplash.com/photo-1511634829096-045a111727eb?q=80&w=1200&auto=format&fit=crop" alt="Prezentovanie pred triedou">
+        <img src="images/deti_4.jpg" alt="Tímová aktivita detí">
+        <img src="images/deti_5.jpeg" alt="Kreatívne kreslenie">
+        <img src="images/deti_6.jpg" alt="Prezentovanie pred triedou">
       </div>
     </div>
   </div>
 
-  <!-- 4 tracks -->
-  <div class="container">
-    <div class="section">
-      <h2>Tematické okruhy (vyberte si)</h2>
-      <div class="tracks">
-        <div class="track">
-          <h3>Kurz komunikačných zručností</h3>
-          <p>Deti a tínedžeri často potrebujú zlepšiť komunikačné zručnosti – ľahšie nadväzovať vzťahy, obhájiť argumenty, riešiť konflikty, postaviť sa za seba, nastaviť hranice a povedať NIE. V 6-týždňovom kurze si osvoja moderné nástroje rešpektujúcej komunikácie s rodičmi, učiteľmi, rovesníkmi aj cudzími ľuďmi.</p>
-        </div>
-        <div class="track">
-          <h3>Efektívne riešenie problémov</h3>
-          <p>Ukážeme tvorivý brainstorming, mind mapy a brainwriting. Učíme postoj „problém = výzva“, ktorý pripraví na prijímačky, súťaže či pohovory – koučovací princíp hľadania riešení namiesto výhovoriek.</p>
-        </div>
-        <div class="track">
-          <h3>Kurz prezentačných zručností</h3>
-          <p>Prezentovanie projektov v škole patrí medzi silné stresory. Deti získajú princípy pútavého vystupovania – aby to bavilo ich aj publikum. Nácvik hlasu, postoja, štruktúry, práce s trémou a publikom.</p>
-        </div>
-        <div class="track">
-          <h3>Rozvoj kreatívneho myslenia</h3>
-          <p>Hry, úlohy a príbehy rozvíjajú zvedavosť a schopnosť myslieť „inak“. Podporujeme tvorivosť bez hodnotenia, radosť z objavovania a zdravý postoj k chybám – obzvlášť dôležité v dobe, keď sa mnohí spoliehajú na AI.</p>
+<!-- 6 Thematic Accordion Tracks - Stacked -->
+<div class="container">
+  <div class="section">
+    <h2>Venujeme sa témam:</h2>
+    <div class="accordion-stack">
+
+      <div class="accordion-item">
+        <button class="accordion-header">Sebapoznanie a adaptácia na zmenu</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– predstavenie sa, spoznanie silných stránok – kto som, čo mám rád, čo ma vystihuje</li>
+            <li>– adaptácia a budovanie istoty v novom prostredí – ako sa zorientovať a si nájsť si kamarátov</li>
+          </ul>
         </div>
       </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Motivácia a stanovenie cieľov</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– učíme sa, ako dosiahnuť cieľ cez malé kroky a ako sa nevzdávať pri malých neúspechoch</li>
+            <li>– ako dieťa motivovať, keď motivácia chýba alebo slabne</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Emocionálna inteligencia</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– učíme sa rozpoznať a pomenovať emócie a reagovať empaticky</li>
+            <li>– osvojujeme si nástroje pre vnútornú rovnováhu a sebaistotu</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Komunikácia (spolupráca vs. konflikt)</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– aktívne počúvame, učíme sa vyjadriť svoj názor a pritom rešpektovať druhého</li>
+            <li>– porovnávame rozdiely medzi spoluprácou a konfliktom, učíme sa stanoviť si hranice</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Kreatívne riešenia problémov</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– osvojujeme si kreatívne postupy ako brainstorming, myšlienkové mapy, kritické myslenie</li>
+            <li>– učíme sa, ako si poradiť v náročnej situácii, hľadať rôzne spôsoby a nájsť to najlepšie riešenie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Sebareflexia a sebaprezentácia</button>
+        <div class="accordion-content">
+          <ul>
+            <li>– vyhodnocujeme svoj pokrok a úspech</li>
+            <li>– učíme sa oceniť a uznať vlastný pokrok a prezentovať svoje výsledky a úspechy pre ostatnými</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
 
   <!-- Benefits list -->
   <div class="container">
@@ -410,7 +516,7 @@
     <div class="section">
       <h2>Vaša lektorka</h2>
       <div class="instructor">
-        <img class="avatar" src="https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ing. Miroslava Atanasová">
+        <img class="avatar" src="images/profil.png" alt="Ing. Miroslava Atanasová">
         <div>
           <h3>Ing. Miroslava Atanasová</h3>
           <p>ICF koučka, certifikovaná lektorka, mentorka a tvorkyňa vzdelávacích programov pre deti i dospelých. V osobnom rozvoji pôsobí vyše 20 rokov. Je mamou, autorkou meditácií aj detských knižiek. <a href="#lektor" style="color:var(--g2);text-decoration:underline">Viac info&nbsp;TU&nbsp;»</a></p>
@@ -493,5 +599,76 @@
 </div>
 
 
+
+
+<script>
+(function(){
+  const items = document.querySelectorAll('.accordion-item');
+
+  items.forEach((item, idx) => {
+    const header  = item.querySelector('.accordion-header');
+    const content = item.querySelector('.accordion-content');
+
+    // A11y wiring
+    const cid = content.id || `acc-content-${idx+1}`;
+    content.id = cid;
+    header.setAttribute('aria-controls', cid);
+    header.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
+
+    // Set initial height
+    if (item.classList.contains('active')){
+      content.style.height = 'auto';
+      content.style.paddingTop = '24px';
+      content.style.paddingBottom = '24px';
+    } else {
+      content.style.height = '0px';
+      content.style.paddingTop = '0px';
+      content.style.paddingBottom = '0px';
+    }
+
+    header.addEventListener('click', () => toggle(item, header, content));
+    // Optional: keyboard support if header becomes non-button in future
+    header.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(item, header, content); }
+    });
+  });
+
+  function toggle(item, header, content){
+    const isOpen = item.classList.contains('active');
+
+    if (isOpen){
+      // Closing: from auto -> px -> 0 (so it animates)
+      const start = content.scrollHeight;
+      content.style.height = start + 'px';
+      // force reflow
+      void content.offsetHeight;
+      item.classList.remove('active');
+      header.setAttribute('aria-expanded','false');
+      content.style.height = '0px';
+      content.style.paddingTop = '0px';
+      content.style.paddingBottom = '0px';
+    } else {
+      // Opening: 0 -> target px, then set to auto after transition
+      item.classList.add('active');
+      header.setAttribute('aria-expanded','true');
+      const target = content.scrollHeight;
+      content.style.height = target + 'px';
+      content.style.paddingTop = '24px';
+      content.style.paddingBottom = '24px';
+    }
+
+    // After height finishes, set to auto for responsive content
+    const onEnd = (ev) => {
+      if (ev.propertyName !== 'height') return;
+      if (item.classList.contains('active')){
+        content.style.height = 'auto';
+      }
+      content.removeEventListener('transitionend', onEnd);
+    };
+    content.addEventListener('transitionend', onEnd);
+  }
+})();
+
+  </script>
 </body>
 </html>
