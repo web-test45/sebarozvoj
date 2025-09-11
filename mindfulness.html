@@ -1,655 +1,746 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurzy Mindfulness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Allura" rel="stylesheet">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sebarozvoj</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        body {
+            font-family: 'Baloo 2', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
 
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    header {
-        height: 80px;
-        background-color: white;
-        display: flex;
-        justify-content: center; /* center horizontally */
-        align-items: center;     /* center vertically */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        z-index: 10;
-        position: relative;
-    }
-
-    header img {
-      height: 60px;
-    }
-
-    .intro-text {
-      flex-basis: 100%;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .intro-text h1 {
-      color: purple;
-      font-size:2.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      margin-top: -10px;
-      font-family: 'Baloo 2', sans-serif;
-    }
-
-    .intro-text p {
-      color: grey;
-      font-size: 1rem;
-    }
+        header {
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: center; /* center horizontally */
+            align-items: center;     /* center vertically */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+            position: relative;
+            }
 
 
-    .container {
-      display: flex;
-      flex-direction: column; /* stack intro on top */
-      align-items: center;
-      gap: 40px;
-      padding: 60px 20px;
-      min-height: calc(100vh - 80px);
-      background: linear-gradient(135deg, #f5f7fa 0%, #f0f1e9 100%);
-      position: relative;
-      overflow: hidden;
-    }
+        header img {
+            height: 60px;
+            }
 
-    .cards-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
+        /* Hero Section */  
+        .hero{
+        padding:60px 0;
+        text-align:center;
+        position:relative;
+        overflow:hidden;
+        background:linear-gradient(135deg, rgba(69,182,73,.1) 100%, rgba(220,227,91,.1) 0%);
+        }
+        .hero::before{
+        content:"";
+        position:absolute;
+        inset:-50%;
+        background:
+            url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="%23dce35b" opacity="0.3"/><circle cx="75" cy="75" r="1.5" fill="%2345b649" opacity="0.2"/><circle cx="50" cy="10" r="1" fill="%23dce35b" opacity="0.4"/></svg>');
+        animation:float 20s linear infinite;
+        pointer-events:none
+        }
+        @keyframes float {
+        0%{transform:rotate(0)}
+        100%{transform:rotate(360deg)}
+        }
+        .hero h1{
+        font-size:3rem;
+        font-weight:700;
+        margin-bottom:10px;
+        background:linear-gradient(135deg,#dce35b,#45b649);
+        -webkit-background-clip:text;
+        background-clip:text;
+        -webkit-text-fill-color:transparent;
+        }
+        .hero .subtitle{
+        font-size:1.35rem;
+        color:#666;
+        }
 
 
-    .card {
-      width: 490px;
-      height: 470px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      z-index: 1;
-      display: block;
-    }
+        /* Course Info Box */
+        .course-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
 
-    /* svg overlay that draws the border */
-    .card .svg-border {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none; /* allow clicks through */
-      z-index: 3;
-      display: block;
-    }
+        .course-info::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 3px;
+            background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #67d02588;
-    }
+        .course-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+        }
 
-    .card-image {
-      width: 100%;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
+        .detail-item {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
 
-    .card-divider {
-      height: 1px;
-      background-color: #e0e0e0;
-      width: 100%;
-    }
+        .contact-details {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
 
-    .card-content {
-      padding: 30px 25px;
-      height: 200px;
-      display: flex;
-      flex-direction: column;
-    }
+            
+        }
 
-    .card-title {
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #800080;
-      margin-bottom: 20px;
-      padding-bottom: 5px;
-      text-align: center;
-      margin-top: -20px;
-      border-bottom: 1px solid #e0e0e0;
-    }
+        .course-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items:  center;
+            flex-wrap: wrap;
+        }
 
-    .card-list {
-      list-style: none;
-      flex: 1;
-    }
+        .course-image {
+            max-width: 400px; /* increase image size */
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* stronger shadow */
+            flex-shrink: 0;
+            margin-bottom: 30px;
+        }
 
-    .card-list li {
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 8px;
-      padding-left: 20px;
-      position: relative;
-      line-height: 1.4;
-    }
 
-    .card-list li::before {
-      content: '•';
-      color: #800080;
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
+        .course-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        gap: 30px;
-        padding: 40px 20px;
-      }
 
-      .card {
-        width: 100%;
-        max-width: 420px;
-      }
-    }
+        /* Open Hours Section */
+        .open-hours {
+            background: linear-gradient(135deg, rgba(220, 227, 91, 0.1) 0%, rgba(69, 182, 73, 0.09) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 5px solid;
+            border-image: linear-gradient(135deg, #dce35b 0%, #45b649 100%) 1;
+        }
 
-    /* remaining styles kept intact... */
-    .about_title {
-      font-family: 'Baloo 2', sans-serif;
-      color: #800080;
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 60px;
-      margin-bottom: 40px;
-    }
 
-    .about_wrapper {
-      padding: 60px 0;
-      width: 100%;
-      background: #e7ff9a;
-    }
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(135deg, #DCE35B, #45B649);
+            padding: 50px;
+            text-align: center;
+            color: white;
+        }
 
-    .about_section {
-      display: flex;
-      gap: 40px;
-      max-width: 1000px;
-      margin: 0 auto 60px auto;
-      padding: 0 20px;
-      align-items: flex-start;
-    }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
 
-    .about_image {
-      flex: 0 0 350px;
-      text-align: center;
-    }
+        .video-placeholder {
+            background: #000;
+            color: white;
+            padding: 100px;
+            border-radius: 15px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
-    .about_image img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
+        /* Section Styling */
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
 
-    .about_caption {
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 0.95rem;
-      color: #666;
-      margin-top: 15px;
-      font-style: italic;
-      line-height: 1.4;
-    }
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-    .about_text {
-      flex: 1;
-      font-family: 'Baloo 2', sans-serif;
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: #444;
-    }
+        /* Bullet Points */
+        .bullet-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
 
-    .about_text p {
-      margin-bottom: 20px;
-    }
+        .bullet-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(220, 227, 91, 0.09) 0%, rgba(69, 182, 73, 0.09) 100%);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
 
-    .about_text strong {
-      color: #800080;
-      font-weight: bold;
-    }
+        .bullet-item-bad {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(227, 91, 91, 0.09) 0%, rgba(182, 69, 69, 0.09) 100%);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
 
-    .about_link {
-      color: #800080;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
+        .bullet-item:hover {
+            transform: translateY(-5px);
+        }
 
-    .about_link:hover {
-      color: #990099;
-      text-decoration: underline;
-    }
+        .bullet-icon {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
 
-    @media (max-width: 768px) {
-      .about_section {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-      }
+        /* Speech Bubble */
+        .speech-bubble {
+            background: linear-gradient(135deg, #afd757 0%, #4cc150 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            font-size: 1.1rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-      .about_image {
-        flex: none;
-      }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #45b649;
+        }
 
-      .about_image img {
-        width: 250px;
-        height: 250px;
-      }
-    }
+        /* Feedback Section */
+        .feedback-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
 
-    .blog_section_title {
-      font-family: 'Baloo 2', sans-serif;
-      color: #800080;
-      font-size: 2rem;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 60px;
-      margin-bottom: 30px;
-    }
+        .feedback-column h3 {
+            color: #e710e0;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .blog_articles_container {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      font-family: 'Baloo 2', sans-serif;
-    }
+        .feedback-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+            border-image: linear-gradient(135deg, #dce35b 0%, #45b649 100%) 1;
+        }
 
-    .article {
-      display: flex;
-      flex-direction: row;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      overflow: hidden;
-      align-items: stretch;
-    }
+        /* Course Activities */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
 
-    .article:hover {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-    }
+        .activity-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid;
+            border-image: linear-gradient(135deg, #dce35b 0%, #45b649 100%) 1;
+        }
 
-    .article .thumb {
-      flex: 0 0 200px;
-      height: 200px;
-      overflow: hidden;
-      border-top-left-radius: 12px;
-      border-radius: 12px;
-    }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
 
-    .article .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        .activity-emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-    .article_body {
-      flex: 1;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+        /* Email Form */
+        .form-section {
+            margin-top: 1000px;
+            background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+            padding: 60px 40px;
+            border-radius: 30px;
+            margin: 60px auto; 
+            color: white;
+            max-width: 700px; 
+            border: 1px solid white;
+        }
+        
 
-    .article_body h2 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      color: #800080;
-    }
+    
+        .form-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .article_body h2 a {
-      text-decoration: none;
-      color: inherit;
-    }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    .article_body .excerpt {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 20px;
-    }
+        .form-group {
+            margin-bottom: 25px;
+        }
 
-    .read_more {
-      display: inline-block;
-      background-color: #800080;
-      color: white;
-      padding: 10px 20px;
-      align-self: flex-start;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.95rem;
-      transition: background-color 0.3s ease;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
 
-    .read_more:hover {
-      background-color: #990099;
-     
-    }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.477);
+            border: 1px solid white;
+            transition: all 0.3s ease;
+        }
 
-    .article_meta {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 20px;
-    }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.847);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
 
-    .article_meta .icon {
-      width: 18px;
-      height: 18px;
-      margin-right: 6px;
-      vertical-align: middle;
-      fill: currentColor;
-    }
-    .article_meta span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
 
-  </style>
+
+        .form-group select {
+            appearance: none; /* removes default arrow in most browsers */
+            -webkit-appearance: none; /* for Safari */
+            -moz-appearance: none; /* for Firefox */
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%2345b649' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px 18px;
+            padding-right: 45px; /* space for the arrow */
+            cursor: pointer;
+            color: grey;
+
+        }
+        .form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.847);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .submit-btn {
+            background: rgba(255, 255, 255, 0.477);
+            color: grey;
+            padding: 15px 40px;
+            border: 1px solid white;
+            border-radius: 25px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Decorative Images */
+        .decorative-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid white;
+            margin: 20px;
+            float: right;
+        }
+
+        .decorative-img:nth-child(even) {
+            float: left;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .feedback-section {
+                grid-template-columns: 1fr;
+            }
+
+            
+            
+            .decorative-img {
+                float: none;
+                display: block;
+                margin: 20px auto;
+            }
+            
+            .course-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <img src="images/logo.png" alt="Logo" />
+    </header>
 
-  <header>
-    <img src="images/logo.png" alt="Logo" />
-  </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Kurz Mindfulness pre deti a tínedžerov</h1>
+            <p class="subtitle">Zameraný na zvládanie stresu a emócií pomocou všímavosti</p>
+        </div>
+    </section>
 
-  <div class="container">
-    <div class="intro-text">
-      <h1>Svet sebarozvoja pre deti a teenagerov</h1>
-      <p>Vyberte si, na čo sa chcete zamerať</p>
-    </div>
+    <!-- Course Info -->
+    <div class="container">
+        <div class="course-info">
+            <div class="course-layout">
+                <img src="images/cover.jpg" alt="Course cover" class="course-image">
+                <div class="course-details">
+                    <div class="detail-item">
+                        <strong>KEDY:</strong> september 2025 (termín upresníme)
+                    </div>
+                    <div class="detail-item">
+                        <strong>V ČASE:</strong> každú stredu od 16,45 - 18,15 hod
+                    </div>
+                    <div class="detail-item">
+                        <strong>KDE:</strong> Centrum Mindfulness MBSR Slovensko, Peterská 8, Bratislava-Ružinov
+                    </div>
+                </div>
+            </div>
+            <div class="contact-details">
+                📧 info@sebarozvoj.eu │ 📞 0948 048 641
+            </div>
+        </div>
+    </div> 
     
-   
-    <div class="cards-row">
-    <a href="https://web-test45.github.io/sebarozvoj/mindfulness.html" class="card">
-      <div class="card-image" style="background-image: url('images/1.jpg');"></div>
-      <div class="card-divider"></div>
-      <div class="card-content">
-        <h2 class="card-title">Kurz mindfulness</h2>
-        <ul class="card-list">
-          <li>Zvládanie stresu pomocou všímavosti</li>
-          <li>Techniky zvládania emócií</li>
-          <li>Budovanie zdravých vzťahov a empatie</li>
-          <li>Zlepšenie komunikácie</li>
-          <li>Rozvoj emočnej inteligencie</li>
-        </ul>
-      </div>
-    </a>
-  
-    <a href="https://web-test45.github.io/sebarozvoj/sebarozvoj.html" class="card">
-      <div class="card-image" style="background-image: url('images/dva.jpg');"></div>
-      <div class="card-divider"></div>
-      <div class="card-content">
-        <h2 class="card-title">Kurz tvorivého sebarozvoja</h2>
-        <ul class="card-list">
-          <li>Zlepšenie sústredenia a koncentrácie</li>
-          <li>Zvládanie školských povinností s ľahkosťou</li>
-          <li>Rozvoj pamäťových schopností</li>
-          <li>Posilnenie sebavedomia</li>
-          <li>Rozvoj kreativity a posilnenie pozornosti</li>
-        </ul>
-      </div>
-    </a>
-  </div>
-  </div>
 
 
-  <div class="about_wrapper">
-    <h1 class="about_title">Akadémia sebarozvoja</h1>
+        <!-- Open Hours -->
+    <div class="container">
+        <div class="open-hours">
+            <img src="images/1.jpg" alt="Mindfulness for kids" class="decorative-img">
+            <p><strong>Otvorené hodiny:</strong> pred každým kurzom Mindfulness pre deti organizujeme otvorenú hodinu, kde si rodičia a deti môžu vypočuť viac o našom programe, klásť otázky a zároveň „okuknúť" ostatné deti, aby sa na prvú lekciu už mali na koho tešiť.</p>
+            <p><em>(Pozn.: Otvorené hodiny pre rodičov a tínedžerov neorganizujeme.)</em></p>
+            <p>Najbližšie otvorené hodiny plánujeme v septembri. V prípade záujmu môžete vyplniť formulár alebo ma kontaktovať (keď to bude aktuálne, ozveme sa).</p>
+        </div>
+    </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="container">
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        🎥 YouTube Video o Mindfulness pre deti<br>
+                        <small></small>
+                    </div>
+                    <p>Pozrite si naše video o tom, ako mindfulness pomáha deťom</p>
+                </div>
+            </div>
+        </div>
     
-    <div class="about_section">
-      <div class="about_image">
-        <img src="images/profil.png" alt="Miroslava Atanasová" />
-        <p class="about_caption">Ing. Miroslava Atanasová - zakladateľka OZ Akadémia sebarozvoja</p>
-      </div>
-      <div class="about_text">
 
-        <p><strong>Sprevádzam ľudí na ceste sebarozvoja, objavovania vlastnej hodnoty a vnútornej rovnováhy.</strong></p>
-        <p>V oblasti sebarozvoja sa pohybujem takmer 20 rokov. Som medzinárodne certifikovaná koučka, lektorka a mentorka</p> 
-        <p>Posledné roky sa venujem nástrojom mindfulness (všímavosti), pracujem pomocou afirmácií a učím využívať silu mysle. Som autorkou niekoľkých kníh pre deti a eBookv pre dospelých.</p>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="blog_section_title">Pozývam vás prečítať si články na mojom blogu:</h2>
-  <div class="blog_articles_container">
-    <div class="article">
-      <div class="thumb">
-        <img src="images/clanok1.png" alt="Article image" />
-      </div>
-      <div class="article_body">
-        <h2><a href="#">Prečo dať zelenú sebarozvoju</a></h2>
-        <p class="excerpt">Kvalita nášho života, naše správanie, motívy a túžby vychádzajú z potrieb, ktoré máme, ako aj z našej ochoty či schopnosti tieto potreby naplniť. Niekto má silnú potrebu bezpečia, iný potrebu uznania, prijatia či tvorivosti… U niekoho prevažuje potreba sebarealizácie a rastu. Naplnenie tejto potreby v nás spúšťa množstvo tvorivej energie a udržiava nás motivovaných....</p>
-        <a class="read_more" href="#">Celý článok</a>
-        <div class="article_meta">
-          <span class="author">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-            Miroslava Atanasová
-          </span>
-          <span class="views">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
-            2091x
-          </span>
+        <!-- Problem Section -->
+    <div class="container">
+        <div class="section">
+            <img src="images/deti_1.webp" alt="Children meditation" class="decorative-img">
+            <div style="text-align: center; font-size: 1.3rem; font-weight: 600; margin-top: 30px; color: #b64545;">
+                Má vaše dieťa sklony k nadmernému stresu, nízkej sebadôvere alebo potláčaniu emócií?
+            </div>
+            <div class="bullet-list">
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Trápi sa viac, ako je zdravé?</span>
+                </div>
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Podceňuje svoje schopnosti, býva neisté a kritické k sebe?</span>
+                </div>
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Má nízku sebadôveru, ťažko sa presadzuje a neverí si?</span>
+                </div>
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Často sa porovnáva s ostatnými a cíti sa menejcenné?</span>
+                </div>
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Prejavuje úzkosť alebo nervozitu v škole či medzi rovesníkmi?</span>
+                </div>
+                <div class="bullet-item-bad">
+                    <span class="bullet-icon">❗️</span>
+                    <span>Alebo ste si možno všimli, že sa neudrží pozornosť a býva často nesústredené.</span>
+                </div>
+            </div>
+            <div style="text-align: center; font-size: 1.3rem; font-weight: 600; margin-top: 30px; color: #45b649;">
+                Ak áno, Mindfulness pre deti a tínedžerov môže byť tou správnou cestou
+            </div>
         </div>
-      </div>
     </div>
-  
 
-    <div class="article">
-      <div class="thumb">
-        <img src="images/clanok2.png" alt="Article image" />
-      </div>
-      <div class="article_body">
-        <h2><a href="#">Ako dobre poznáš svoje vnútorné dieťa?</a></h2>
-        <p class="excerpt">Keď sa v spomienkach vrátime do detstva, určite tam nájdeme veľa lásky, radosti, hravosti či tvorivosti. No nájdeme tu aj “nelásku” v podobe potlačených potrieb, pocitov strachu, hnevu, hanby, straty bezpečia, krivdy či viny… Vnútorné dieťa žije v každom z nás, bez ohľadu na vek, pohlavie či profesiu. Nepredstavuje len príjemné  či nepríjemné spomienky...</p>
-        <a class="read_more" href="#">Celý článok</a>
-        <div class="article_meta">
-          <span class="author">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-            Miroslava Atanasová
-          </span>
-          <span class="views">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
-            1213x
-          </span>
+        <!-- Speech Bubble -->
+    <div class="container">
+        <div class="speech-bubble">
+            Vedeli ste, že prestížne spoločnosti ako Google, Nike, Target, Yahoo, Apple, Intel, General Mills, Aetna a i. sú ochotné investovať nemalé peniaze do mindfulness programov pre rozvoj svojich zamestnancov?
         </div>
-      </div>
     </div>
 
-
-    <div class="article">
-      <div class="thumb">
-        <img src="images/clanok3.png" alt="Article image" />
-      </div>
-      <div class="article_body">
-        <h2><a href="#">FLOW – stav mysle, kde sa začínajú diať zázraky</a></h2>
-        <p class="excerpt">Stav flow (z angl. prúd) sme už zažili všetci. Je to stav mysle, pri ktorom sme tak ponorení v prítomnom okamihu, že stratíme pojem o čase i okolitom svete. Je jedno, čomu sa v danej chvíli venujeme – či už niečo píšeme, maľujeme, tancujeme, šoférujeme, varíme, tvoríme grafiku alebo práve pracujeme...</p>
-        <a class="read_more" href="#">Celý článok</a>
-        <div class="article_meta">
-          <span class="author">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
-            Miroslava Atanasová
-          </span>
-          <span class="views">
-            <svg class="icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>
-            1742x
-          </span>
+        <!-- Benefits Section -->
+    <div class="container">
+        <div class="section">
+            <h2>Čo vašim deťom mindfulness prinesie</h2>
+            <img src="images/deti_2.png" alt="Happy children" class="decorative-img">
+            <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">
+                Mindfulness nás učí pristupovať k životu s otvorenou mysľou, všímať si svoj pocity, myšlienky a reakcie a vyberať z nich tie, ktoré sú pre nás prospešné. Láskavým prístupom nás vedie k tomu, aby sme na seba, ľudí a životné okolnosti reagovali vedome a s porozumením.
+            </p>
+            
+            <h3 style="color: #e710e0; margin: 30px 0 20px 0; font-size: 1.5rem;">Mindfulness deťom pomáha:</h3>
+            <div class="bullet-list">
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Rozpoznávať a regulovať svoje emócie</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Efektívne zvládať stres a napätie</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Zlepšiť vzťah k sebe aj k druhým</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Rozvíjať emočnú inteligenciu a empatiu</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Podporiť duševnú a mentálnu pohodu</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Rozvíjať sebalásku a vnútornú stabilitu</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Budovať zdravé vzťahy a empatiu</span>
+                </div>
+                <div class="bullet-item">
+                    <span class="bullet-icon">🔹</span>
+                    <span>Zlepšiť koncentráciu a schopnosť učiť sa</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
+        <!-- Feedback Section -->
+    <div class="container">
+        <div class="section">
+            <h2>Akú spätnú väzbu sme dostali:</h2>
+            <img src="images/4.jpg" alt="Testimonials" class="decorative-img">
+            <div class="feedback-section">
+        
+                <div class="feedback-column">
+                    <h3>💬 Čo povedali rodičia:</h3>
+                    <div class="feedback-item">"Už po 2 týždňoch sa vedel chovať pokojnejšie a udržať pozornosť pri učení."</div>
+                    <div class="feedback-item">"Menej úzkosti, stresu zo školy a strachu...</div>
+                    <div class="feedback-item">"Zlepšenie pozornosti, viac motivácie v škole, lepšie výsledky."</div>
+                    <div class="feedback-item">"Strata stresu a rannej bolesti bruška pred školou."</div>
+                    <div class="feedback-item">"Váš kurz bol záchrana pre našu rodinu..."</div>
+                    <div class="feedback-item">"Je menej na mobile, viac komunikuje s kamarátmi."</div>
+                    <div class="feedback-item">"Dcéra pomohla aj mladšiemu bračekovi – keď plakal, učila ho, ako sa má predýchať."</div>
+                </div>
 
-  </div>
+                <div class="feedback-column">
+                    <h3>💬 Čo nám povedali deti:</h3>
+                    <div class="feedback-item">Menej sa bojím.</div>
+                    <div class="feedback-item">Ľahšie sa mi učí.</div>
+                    <div class="feedback-item">Naučila som aj kamošky, čo robiť, keď sa boja.</div>
+                    <div class="feedback-item">Na teste všetci stresovali, iba ja som bol v pohode.</div>
+                    <div class="feedback-item">Najlepší krúžok, na akom som bola!</div>
+                    <div class="feedback-item">Viem sa ukľudniť pred písomkou a pri skúšaní pomocou dychových techník.</div>
+                    <div class="feedback-item">"Aké boli jesenné prázdniny?" – odpoveď: "Najhoršie, lebo sme nemali mindfulness!"</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+        <!-- Course Activities -->
+    <div class="container">
+        <div class="section">
+            <h2>Na kurze sa venujeme:</h2>
+             <!-- <img src="images/5.jpg" alt="Course activities" class="decorative-img">-->
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <span class="activity-emoji">🧘</span>
+                    <strong>Cvičeniam na stíšenie a uzemnenie</strong> – vystúpenie z „automatického pilota"
+                </div>
+                <div class="activity-card">
+                    <span class="activity-emoji">🏃</span>
+                    <strong>Všímavému pohybu a dychovým cvičeniam</strong> – prepojenie tela a mysle
+                </div>
+                <div class="activity-card">
+                    <span class="activity-emoji">🧠</span>
+                    <strong>Tréning zaneprázdnenej mysle</strong> – zlepšenie koncentrácie a rovnováhy
+                </div>
+                <div class="activity-card">
+                    <span class="activity-emoji">💬</span>
+                    <strong>Všímavému vnímaniu myšlienok a emócií</strong> – rozpoznanie pocitov a reakcií
+                </div>
+                <div class="activity-card">
+                    <span class="activity-emoji">🤝</span>
+                    <strong>Láskavý prístup k sebe a druhým</strong> – budovanie empatie a sebaprijatia
+                </div>
+                <div class="activity-card">
+                    <span class="activity-emoji">🎭</span>
+                    <strong>Zážitkovým aktivitám</strong> na prekonávanie ťažkých situácií
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, rgba(220, 227, 91, 0.1) 0%, rgba(69, 182, 73, 0.1) 100%); border-radius: 15px;">
+                <p><strong>💡 Kurz je interaktívny,</strong> každá lekcia obsahuje relaxačné a zážitkové cvičenia, ktoré deti podnecujú k objavovaniu mindfulness hravou a pútavou formou.</p>
+                <p style="margin-top: 15px;"><strong>📖 Po každej lekcii</strong> deti dostávajú pracovné listy a nahrávky relaxačných cvičení, ktoré môže využívať aj po skončení kurzu.</p>
+            </div>
+        </div>
+    </div>
 
+<!-- Email Form -->
 
+    <div class="form-section">
+        <h2>Pre rezerváciu kurzu vyplňte prosím formulár</h2>
+        <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+            My sa vám ozveme telefonicky, preto Vás prosíme aj o uvedenie telefónneho čísla!
+        </p>
 
+        <form class="form-container">
+            <div class="form-group">
+                <input type="text" id="name" name="name" placeholder="Meno a priezvisko" required>
+            </div>
 
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
 
-  <script>
-    (function () {
-      const SVG_NS = 'http://www.w3.org/2000/svg';
-      const STROKE_WIDTH = 3; 
+            <div class="form-group">
+                <input type="tel" id="phone" name="phone" placeholder="Telefónne číslo" required>
+            </div>
 
-      function parseRadius(style) {
-        // prefer individual top-left radius if provided, else use borderRadius
-        const tl = style.borderTopLeftRadius || style.borderRadius;
-        return Math.max(0, parseFloat(tl) || 0);
-      }
+            <div class="form-group">
+                <select id="age" name="age" required>
+                    <option value="">Vek dieťaťa</option>
+                    <option value="7-10">7-10 rokov</option>
+                    <option value="10-14">10-14 rokov</option>
+                    <option value="14-16">14-16 rokov</option>
+                </select>
+            </div>
 
-      function createSvgOverlay(card) {
-        const svg = document.createElementNS(SVG_NS, 'svg');
-        svg.setAttribute('class', 'svg-border');
-        svg.setAttribute('preserveAspectRatio', 'none');
-        svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '100%');
+            <div class="form-group">
+                <textarea id="note" name="note" placeholder="Poznámka"></textarea>
+            </div>
 
-        const path = document.createElementNS(SVG_NS, 'path');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', '#91dd58');      // outline
-        path.setAttribute('stroke-width', String(STROKE_WIDTH));
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('stroke-linejoin', 'round');
-        // hidden initially (we'll set dasharray/dashoffset later)
-        svg.appendChild(path);
-        card.appendChild(svg);
-        return { svg, path };
-      }
+            <button type="submit" class="submit-btn">Odoslať</button>
+        </form>
+    </div>
 
-      function updateBorderPath(card, path) {
-        const rect = card.getBoundingClientRect();
-        const w = Math.max(1, rect.width);
-        const h = Math.max(1, rect.height);
-        const style = getComputedStyle(card);
-        let br = parseRadius(style);
-        // inset for stroke to keep stroke inside the visible rect
-        const inset = STROKE_WIDTH / 2;
-        // clamp radius
-        br = Math.max(0, Math.min(br, w / 2, h / 2) - inset);
-
-        // helper coords
-        const x0 = inset;
-        const x1 = br + inset;
-        const x2 = w - br - inset;
-        const x3 = w - inset;
-        const y0 = inset;
-        const y1 = br + inset;
-        const y2 = h - br - inset;
-        const y3 = h - inset;
-        const startX = w / 2;
-
-        const d = [
-          `M ${startX} ${y0}`,
-          `L ${x2} ${y0}`,
-          `A ${br} ${br} 0 0 1 ${x3} ${y1}`,
-          `L ${x3} ${y2}`,
-          `A ${br} ${br} 0 0 1 ${x2} ${y3}`,
-          `L ${x1} ${y3}`,
-          `A ${br} ${br} 0 0 1 ${x0} ${y2}`,
-          `L ${x0} ${y1}`,
-          `A ${br} ${br} 0 0 1 ${x1} ${y0}`,
-          `L ${startX} ${y0}`,
-          'Z'
-        ].join(' ');
-
-        path.setAttribute('d', d);
-
-        // compute length and set dash styles so we can animate
-        const length = Math.ceil(path.getTotalLength());
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
-        path.dataset._length = length;
-        // smooth transition for draw/hide
-        path.style.transition = 'stroke-dashoffset 0.3s linear';
-      }
-
-      function initCard(card) {
-        const { svg, path } = createSvgOverlay(card);
-        // ensure svg viewbox set properly (will be updated by updateBorderPath)
-        svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
-
-        // Initially build path
-        updateBorderPath(card, path);
-        // on hover draw
-        card.addEventListener('mouseenter', () => {
-          // recalc in case size changed just before hover
-          updateBorderPath(card, path);
-          requestAnimationFrame(() => {
-            path.style.strokeDashoffset = 0;
-          });
-        });
-        // on leave hide (reverse animation)
-        card.addEventListener('mouseleave', () => {
-          const len = path.dataset._length || path.getTotalLength();
-          path.style.transition = 'stroke-dashoffset 0.2s linear'; // faster
-          path.style.strokeDashoffset = len;
-        });
-
-        // update on resize using ResizeObserver
-        if ('ResizeObserver' in window) {
-          const ro = new ResizeObserver(() => {
-            // update svg viewBox and path
-            svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
-            updateBorderPath(card, path);
-          });
-          ro.observe(card);
-        } else {
-          // fallback to window resize
-          window.addEventListener('resize', () => {
-            svg.setAttribute('viewBox', `0 0 ${Math.max(1, card.clientWidth)} ${Math.max(1, card.clientHeight)}`);
-            updateBorderPath(card, path);
-          });
-        }
-      }
-
-      // init all current cards
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.card').forEach(initCard);
-      });
-    })();
-  </script>
-
-</body>
-</html>
