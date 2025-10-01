@@ -391,12 +391,9 @@
 </head>
 <body>
 
-<header>
-  <a href="https://web-test45.github.io/sebarozvoj">
-    <img src="images/logo.png" alt="Logo">
-  </a>
-</header>
-
+  <header>
+    <img src="images/logo.png" alt="Logo" />
+  </header>
 
   <div class="container">
     <div class="intro-text">
@@ -421,17 +418,13 @@
       </div>
     </a>
   
-    <a href="https://web-test45.github.io/sebarozvoj/sebarozvoj.html" class="card">
-      <div class="card-image" style="background-image: url('images/dva.jpg');"></div>
+    <a href="https://web-test45.github.io/sebarozvoj/" class="card">
+      <div class="card-image" style="background-image: url('images/5.jpg');"></div>
       <div class="card-divider"></div>
       <div class="card-content">
-        <h2 class="card-title">Kurz tvorivého sebarozvoja</h2>
+        <h2 class="card-title">Pre dospelých</h2>
         <ul class="card-list">
-          <li>Zlepšenie sústredenia a koncentrácie</li>
-          <li>Zvládanie školských povinností s ľahkosťou</li>
-          <li>Rozvoj pamäťových schopností</li>
-          <li>Posilnenie sebavedomia</li>
-          <li>Rozvoj kreativity a posilnenie pozornosti</li>
+          <li>Prichádza čoskoro</li>
         </ul>
       </div>
     </a>
@@ -652,6 +645,12 @@
         document.querySelectorAll('.card').forEach(initCard);
       });
     })();
+
+    fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
   </script>
 
 </body>
