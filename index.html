@@ -20,21 +20,6 @@
       background-color: #fff;
     }
 
-    header {
-        height: 80px;
-        background-color: white;
-        display: flex;
-        justify-content: center; /* center horizontally */
-        align-items: center;     /* center vertically */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        z-index: 10;
-        position: relative;
-    }
-
-    header img {
-      height: 60px;
-    }
-
     .intro-text {
       flex-basis: 100%;
       text-align: center;
@@ -391,9 +376,7 @@
 </head>
 <body>
 
-  <header>
-    <img src="images/logo.png" alt="Logo" />
-  </header>
+  <div id="header-placeholder"></div>
 
   <div class="container">
     <div class="intro-text">
@@ -646,6 +629,12 @@
       });
     })();
 
+
+    fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("header-placeholder").innerHTML = data;
+    });
     fetch("footer.html")
     .then(response => response.text())
     .then(data => {
